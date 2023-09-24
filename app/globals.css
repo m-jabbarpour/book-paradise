@@ -2,26 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@font-face {
+  font-family: Sahel FD;
+  src: url("/assets/fonts/Sahel-FD.eot");
+  src:
+    url("/assets/fonts/Sahel-FD.eot?#iefix") format("embedded-opentype"),
+    url("/assets/fonts/Sahel-FD.woff2") format("woff2"),
+    url("/assets/fonts/Sahel-FD.woff") format("woff"),
+    url("/assets/fonts/Sahel-FD.ttf") format("truetype");
+  font-weight: normal;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+@font-face {
+  font-family: Sahel FD;
+  src: url("/assets/fonts/Sahel-Bold-FD.eot");
+  src:
+    url("/assets/fonts/Sahel-Bold-FD.eot?#iefix") format("embedded-opentype"),
+    url("/assets/fonts/Sahel-Bold-FD.woff2") format("woff2"),
+    url("/assets/fonts/Sahel-Bold-FD.woff") format("woff"),
+    url("/assets/fonts/Sahel-Bold-FD.ttf") format("truetype");
+  font-weight: bold;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+* {
+  font-family: "Sahel FD";
+}
+
+.input {
+  @apply focus:outline-none rounded p-2 mb-3 focus:shadow;
+}
+
+.submit-button {
+  @apply bg-primary font-bold text-white rounded p-2 cursor-pointer shadow;
+}
+
+.input-error {
+  @apply text-red-600 font-bold text-[10px] h-[16px] mb-2;
+}
+
+.ag-table-icon-container {
+  @apply h-full flex gap-2 items-center justify-between;
 }
