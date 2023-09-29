@@ -27,7 +27,7 @@ const SearchBarSm: React.FC = () => {
   return (
     <>
       {isSearchActive ? (
-        <div className="w-screen h-[5rem] z-20 fixed top-0 right-0 flex justify-between p-3 bg-gray-200 dark:bg-slate-900 dark:text-slate-300">
+        <div className="w-screen h-[5rem] z-20 fixed top-0 right-0 flex justify-between p-3 bg-1 dark:text-slate-300">
           <MagnifyingGlassIcon
             className="w-8 cursor-pointer"
             onClick={handleSearch}
@@ -44,7 +44,7 @@ const SearchBarSm: React.FC = () => {
         </div>
       ) : (
         <div
-          className="p-2 bg-gray-200 dark:bg-slate-600 rounded-full cursor-pointer"
+          className="p-2 bg-3 rounded-full cursor-pointer"
           onClick={() => setIsSearchActive(true)}
         >
           <MagnifyingGlassIcon className="w-4" />

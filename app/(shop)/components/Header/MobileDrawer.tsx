@@ -27,7 +27,7 @@ const MobileDrawer: React.FC = () => {
         onClick={hideDrawer}
       >
         <div
-          className={`bg-white dark:bg-slate-700 h-full z-10 fixed top-0 ${
+          className={`bg-1 h-full z-10 fixed top-0 ${
             isDrawerActive ? "right-0" : "right-[-100%]"
           } p-6  transition-[right] duration-300 ease-in-out`}
           onClick={(event) => event.stopPropagation()}

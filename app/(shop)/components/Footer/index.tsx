@@ -12,7 +12,7 @@ const socialLogos = [
 ];
 
 const Footer: React.FC = () => (
-  <footer className="bg-neutral-200 dark:bg-slate-700 dark:text-slate-300">
+  <footer className="bg-3 dark:text-slate-300">
     <div className="container mx-auto px-12 py-4">
       <div className="xl:flex pb-4 border-b-[1px] border-gray-100">
         <div className="w-full xl:w-1/3 flex flex-col justify-around items-center gap-2 text-xs px-8 mx-auto">

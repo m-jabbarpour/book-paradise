@@ -43,12 +43,12 @@ const SideBar = () => {
   console.log(pathname);
 
   return (
-    <aside className="min-h-[calc(100vh-48px)] w-48 p-2 bg-gray-200 dark:bg-slate-800 ">
+    <aside className="min-h-[calc(100vh-48px)] w-48 p-2 bg-2 ">
       <ul>
         {items.map((item, index) => (
           <Link key={index} href={item.route}>
             <li
-              className={`flex gap-3 rounded p-2 hover:bg-gray-300 dark:hover:bg-slate-700 cursor-pointer ${
+              className={`flex gap-3 rounded p-2 hover:bg-2 cursor-pointer ${
                 pathname === item.route ? "text-primary font-bold" : ""
               }`}
             >

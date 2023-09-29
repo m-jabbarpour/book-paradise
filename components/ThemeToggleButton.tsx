@@ -69,7 +69,7 @@ const ThemeToggleButton: React.FC = () => {
       {isMenuOpen && (
         <div
           ref={menuRef}
-          className="absolute left-0 top-14 py-1 rounded bg-white dark:bg-slate-900 shadow dark:shadow-slate-400  z-10"
+          className="absolute left-0 top-14 py-1 rounded bg-1 shadow dark:shadow-slate-400  z-10"
         >
           {menuOptions.map((option) => (
             <div

@@ -28,6 +28,18 @@
   font-family: "Sahel FD";
 }
 
+.bg-1 {
+  @apply bg-white dark:bg-slate-950;
+}
+
+.bg-2 {
+  @apply bg-neutral-100 dark:bg-slate-900;
+}
+
+.bg-3 {
+  @apply bg-neutral-200 dark:bg-slate-700;
+}
+
 .input {
   @apply focus:outline-none rounded p-2 mb-3 focus:shadow;
 }
