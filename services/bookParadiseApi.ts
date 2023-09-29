@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+import { getSession } from "next-auth/react";
+
 import {
   Author,
   Book,
@@ -8,9 +10,22 @@ import {
   Translator,
 } from "@/types";
 
+import { BASE_URL } from "@/constants";
+
 export const bookParadiseApi = createApi({
   reducerPath: "bookParadiseApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://book-paradise.ir/api/" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: BASE_URL,
+    prepareHeaders: async (headers, { getState }) => {
+      const session = await getSession();
+      const token = session?.user?.token;
+
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
+  }),
   tagTypes: ["books", "authors", "categories", "publishers", "translators"],
   endpoints: (builder) => ({
     //***************************Books******************************//
