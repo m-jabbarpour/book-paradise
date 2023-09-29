@@ -36,7 +36,6 @@ export type CategoryWithChildren = Category & {
 export type CategoryWithParent = Category & {
   parent: CategoryWithParent;
 };
-
 export interface Book {
   title: string;
   description: string;
@@ -49,4 +48,9 @@ export interface Book {
   publisherId: number;
   publisher: Publisher;
   id: number;
+}
+export interface SummarizedBookInfo {
+  id: number;
+  title: string;
+  authorsFullName: string[];
 }
