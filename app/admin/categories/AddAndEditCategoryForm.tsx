@@ -45,8 +45,6 @@ const AddAndEditCategoryForm: React.FC<Props> = ({
 
   const { data: categories } = useGetCategoriesQuery();
 
-  if (categories) console.log(categories);
-
   const [addCategory, addCategoryResponse] = useAddCategoryMutation();
 
   const [editCategory, editCategoryResponse] = useEditCategoryMutation();
@@ -62,7 +60,6 @@ const AddAndEditCategoryForm: React.FC<Props> = ({
         .then((res) => {
           toast.success(res.message);
           setIsModalOpen(false);
-          console.log(res);
         })
         .then((error) => {
           console.log(error);

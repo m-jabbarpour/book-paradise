@@ -14,46 +14,6 @@ import {
 
 import { Book } from "@/types";
 
-const bookSchema = z.object({
-  title: z.string().trim().min(2, "وارد کردن عنوان الزامیست (حداقل 2 حرف)"),
-  description: z
-    .string()
-    .trim()
-    .min(10, "وارد کردن شرح الزامیست (حداقل 10 حرف)"),
-  summary: z
-    .string()
-    .trim()
-    .min(10, "وارد کردن خلاصه کتاب الزامیست (حداقل 10 حرف)"),
-  price: z.string().trim().min(1, "وارد کردن قیمت الزامیست (حداقل 0)"),
-  inventory: z.string().trim().min(1, "وارد کردن موجودی الزامیست (حداقل 0)"),
-  // bookImage: z.custom(fileValidator, "بارگذاری تصویر الزامیست"),
-  bookImage: z.instanceof(File, { message: "بارگذاری تصویر الزامیست" }),
-  categoryId: z.string().trim().min(1, "انتخاب دسته‌بندی الزامیست"),
-  publisherId: z.string().trim().min(1, "انتخاب انتشارات الزامیست"),
-  authorIds: z.string().array().nonempty("انتخاب حداقل یک نویسنده الزامیست"),
-  translatorIds: z.string().array(),
-});
-
-type BookSchema = z.infer<typeof bookSchema>;
-
-const createFormData = (inputData: BookSchema) => {
-  const formdata = new FormData();
-
-  Object.entries(inputData).forEach(([key, value]) => {
-    if (Array.isArray(value)) {
-      value.forEach((item) => {
-        formdata.append(key, item);
-      });
-    } else if (value instanceof File) {
-      formdata.append(key, value, value.name);
-    } else {
-      formdata.append(key, value);
-    }
-  });
-
-  return formdata;
-};
-
 interface Props {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   selectedBook?: Book;
@@ -63,6 +23,61 @@ const AddAndEditBookForm: React.FC<Props> = ({
   setIsModalOpen,
   selectedBook,
 }) => {
+  const isInEditMode = Boolean(selectedBook);
+
+  const bookSchema = z.object({
+    title: z.string().trim().min(2, "وارد کردن عنوان الزامیست (حداقل 2 حرف)"),
+    description: z
+      .string()
+      .trim()
+      .min(10, "وارد کردن شرح الزامیست (حداقل 10 حرف)"),
+    summary: z
+      .string()
+      .trim()
+      .min(10, "وارد کردن خلاصه کتاب الزامیست (حداقل 10 حرف)"),
+    price: z.string().trim().min(1, "وارد کردن قیمت الزامیست (حداقل 0)"),
+    inventory: z.string().trim().min(1, "وارد کردن موجودی الزامیست (حداقل 0)"),
+    bookImage: z
+      .union([z.instanceof(File), z.undefined()])
+      .optional()
+      .refine(
+        (val) => {
+          if (isInEditMode) {
+            return true;
+          }
+          if (val instanceof File) {
+            return true;
+          }
+          return false;
+        },
+        { message: "بارگذاری تصویر الزامیست" }
+      ),
+    categoryId: z.string().trim().min(1, "انتخاب دسته‌بندی الزامیست"),
+    publisherId: z.string().trim().min(1, "انتخاب انتشارات الزامیست"),
+    authorIds: z.string().array().nonempty("انتخاب حداقل یک نویسنده الزامیست"),
+    translatorIds: z.string().array(),
+  });
+
+  type BookSchema = z.infer<typeof bookSchema>;
+
+  const createFormData = (inputData: BookSchema) => {
+    const formdata = new FormData();
+
+    Object.entries(inputData).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        value.forEach((item) => {
+          formdata.append(key, item);
+        });
+      } else if (value instanceof File) {
+        formdata.append(key, value, value.name);
+      } else {
+        formdata.append(key, value);
+      }
+    });
+
+    return formdata;
+  };
+
   const {
     register,
     handleSubmit,
@@ -71,7 +86,17 @@ const AddAndEditBookForm: React.FC<Props> = ({
     formState: { errors },
   } = useForm<BookSchema>({
     resolver: zodResolver(bookSchema),
-    defaultValues: {},
+    defaultValues: {
+      title: selectedBook?.title,
+      description: selectedBook?.description,
+      summary: selectedBook?.summary,
+      price: String(selectedBook?.price),
+      inventory: String(selectedBook?.inventory),
+      categoryId: String(selectedBook?.categoryId),
+      publisherId: String(selectedBook?.publisherId),
+      authorIds: selectedBook?.authors.map((a) => String(a.id)),
+      translatorIds: selectedBook?.translators?.map((t) => String(t.id)),
+    },
   });
 
   const { data: categories } = useGetCategoriesQuery();
@@ -87,7 +112,6 @@ const AddAndEditBookForm: React.FC<Props> = ({
       .then((res) => {
         toast.success(res.message);
         setIsModalOpen(false);
-        console.log(res.message);
       })
       .then((error) => {
         console.log(error);

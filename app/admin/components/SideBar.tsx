@@ -40,7 +40,6 @@ const items = [
 
 const SideBar = () => {
   const pathname = usePathname();
-  console.log(pathname);
 
   return (
     <aside className="min-h-[calc(100vh-48px)] w-48 p-2 bg-2 ">
