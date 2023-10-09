@@ -39,6 +39,7 @@ export type CategoryWithParent = Category & {
 export interface Book {
   title: string;
   description: string;
+  summary: string;
   price: number;
   inventory: number;
   categoryId: number;
@@ -53,4 +54,19 @@ export interface SummarizedBookInfo {
   id: number;
   title: string;
   authorsFullName: string[];
+}
+
+export interface FullBookInfo {
+  title: string;
+  description: string;
+  summary: string;
+  price: number;
+  inventory: number;
+  categoryId: number;
+  category: CategoryInBook;
+  authors: Author[];
+  translators: Author[]; // You may want to specify a type for translators if needed
+  publisherId: number;
+  publisher: Publisher;
+  id: number;
 }
