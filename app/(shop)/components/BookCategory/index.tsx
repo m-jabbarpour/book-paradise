@@ -1,4 +1,6 @@
-import BookSwiper from "./BookSwiper";
+import BookSwiper from "../../../../components/BookSwiper";
+
+import { SummarizedBookInfo } from "@/types";
 
 async function getData(categoryId: number) {
   const res = await fetch(
@@ -18,7 +20,7 @@ interface Props {
 }
 
 const BookCategory: React.FC<Props> = async ({ categoryId, categoryTitle }) => {
-  const books = await getData(categoryId);
+  const books: SummarizedBookInfo[] = await getData(categoryId);
 
   return (
     <div className="bg-2">
