@@ -10,6 +10,8 @@ import storage from "redux-persist/lib/storage";
 
 import { bookParadiseApi } from "@/services/bookParadiseApi";
 
+import cartSlice from "../slices/cartSlice";
+
 const persistConfig = {
   key: "root",
   storage,
@@ -18,7 +20,7 @@ const persistConfig = {
 
 const combinedReducers = combineReducers({
   [bookParadiseApi.reducerPath]: bookParadiseApi.reducer,
-  // cart: cartSlice,
+  cart: cartSlice,
 });
 
 const persistedReducers = persistReducer(persistConfig, combinedReducers);
