@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 
-import { ColDef } from "ag-grid-community";
+import { ColDef, ICellRendererParams } from "ag-grid-community";
 
 import Modal from "@/components/Modal";
 import AddButton from "../components/AddButton";
@@ -32,7 +32,7 @@ const Authors = () => {
       { field: "firstName", headerName: "نام" },
       { field: "lastName", headerName: "نام خانوادگی" },
       {
-        cellRenderer: (params) => {
+        cellRenderer: (params: ICellRendererParams<Author, React.ReactNode, any>) => {
           return (
             <div className="ag-table-icon-container">
               <PencilIcon
@@ -44,7 +44,7 @@ const Authors = () => {
               />
               <TrashIcon
                 className="w-4 h-4"
-                onClick={() => deleteAuthor({ id: params.data.id })}
+                onClick={() => deleteAuthor({ id: params?.data?.id })}
               />
             </div>
           );

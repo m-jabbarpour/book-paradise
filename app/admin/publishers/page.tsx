@@ -11,7 +11,7 @@ import {
 } from "@/services/bookParadiseApi";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { Publisher } from "@/types";
-import { ColDef } from "ag-grid-community";
+import { ColDef, ICellRendererParams } from "ag-grid-community";
 import AddAndEditPublisherForm from "./AddAndEditPublisherForm";
 
 const Publishers = () => {
@@ -27,7 +27,9 @@ const Publishers = () => {
     () => [
       { field: "title", headerName: "عنوان" },
       {
-        cellRenderer: (params) => {
+        cellRenderer: (
+          params: ICellRendererParams<Publisher, React.ReactNode, any>
+        ) => {
           return (
             <div className="ag-table-icon-container">
               <PencilIcon
@@ -39,7 +41,7 @@ const Publishers = () => {
               />
               <TrashIcon
                 className="w-4 h-4"
-                onClick={() => deletePublisher({ id: params.data.id })}
+                onClick={() => deletePublisher({ id: params.data?.id })}
               />
             </div>
           );

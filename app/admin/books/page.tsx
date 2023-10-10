@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 
-import { ColDef } from "ag-grid-community";
+import { ColDef, ICellRendererParams } from "ag-grid-community";
 
 import Modal from "@/components/Modal";
 import AddButton from "../components/AddButton";
@@ -32,16 +32,22 @@ const Books = () => {
       { field: "title", headerName: "عنوان" },
       {
         headerName: "دسته",
-        cellRenderer: (params) => params.data.category.title,
+        cellRenderer: (
+          params: ICellRendererParams<Book, React.ReactNode, any>
+        ) => params.data?.category.title,
       },
       {
         headerName: "انتشارات",
-        cellRenderer: (params) => params.data.publisher.title,
+        cellRenderer: (
+          params: ICellRendererParams<Book, React.ReactNode, any>
+        ) => params.data?.publisher.title,
       },
       { field: "price", headerName: "قیمت" },
       { field: "inventory", headerName: "موجودی" },
       {
-        cellRenderer: (params) => {
+        cellRenderer: (
+          params: ICellRendererParams<Book, React.ReactNode, any>
+        ) => {
           return (
             <div className="ag-table-icon-container">
               <PencilIcon
@@ -53,7 +59,7 @@ const Books = () => {
               />
               <TrashIcon
                 className="w-4 h-4"
-                onClick={() => deleteBook({ id: params.data.id })}
+                onClick={() => deleteBook({ id: params.data?.id })}
               />
             </div>
           );

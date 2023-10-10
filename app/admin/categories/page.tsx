@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 
-import { ColDef } from "ag-grid-community";
+import { ColDef, ICellRendererParams } from "ag-grid-community";
 
 import Modal from "@/components/Modal";
 import AddButton from "../components/AddButton";
@@ -16,7 +16,7 @@ import {
   useGetCategoriesQuery,
 } from "@/services/bookParadiseApi";
 
-import { Category } from "@/types";
+import { Category, CategoryWithParent } from "@/types";
 
 const Categories = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -32,10 +32,14 @@ const Categories = () => {
       {
         field: "parent",
         headerName: "دسته‌بندی والد",
-        cellRenderer: (params) => params.data.parent?.title || "-",
+        cellRenderer: (
+          params: ICellRendererParams<CategoryWithParent, React.ReactNode, any>
+        ) => params.data?.parent?.title || "-",
       },
       {
-        cellRenderer: (params) => {
+        cellRenderer: (
+          params: ICellRendererParams<CategoryWithParent, React.ReactNode, any>
+        ) => {
           return (
             <div className="ag-table-icon-container">
               <PencilIcon
@@ -47,7 +51,7 @@ const Categories = () => {
               />
               <TrashIcon
                 className="w-4 h-4"
-                onClick={() => deleteCategory({ id: params.data.id })}
+                onClick={() => deleteCategory({ id: params.data?.id })}
               />
             </div>
           );
