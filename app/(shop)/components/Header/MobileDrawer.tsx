@@ -1,12 +1,15 @@
-"use client";
-
 import { useState } from "react";
 
 import { Bars3Icon } from "@heroicons/react/20/solid";
 
-import Categories from "./Categories";
+import { CategoryWithParent } from "@/types";
 
-const MobileDrawer: React.FC = () => {
+import Categories from "./Categories";
+interface Props {
+  categories: CategoryWithParent[];
+}
+
+const MobileDrawer: React.FC<Props> = ({ categories }) => {
   const [isDrawerActive, setIsDrawerActive] = useState<boolean>(false);
 
   const showDrawer = () => {
@@ -35,7 +38,10 @@ const MobileDrawer: React.FC = () => {
           <h1 className="font-bold text-xl dark:text-slate-200 mb-6">
             دسته‌بندی
           </h1>
-          {/* <Categories /> */}
+          <Categories
+            categories={categories}
+            setIsDrawerActive={setIsDrawerActive}
+          />
         </div>
       </div>
     </>
