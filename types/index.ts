@@ -70,3 +70,20 @@ export interface FullBookInfo {
   publisher: Publisher;
   id: number;
 }
+
+export interface BookInCart {
+  id: string;
+  title: string;
+  image: string;
+  price: number;
+  number?: number;
+}
+
+export interface Cart {
+  addedBooks: BookInCart[];
+  subTotal: number;
+  discountCode: string;
+  discountPercentage: number;
+  discount: number;
+  total: number;
+}
