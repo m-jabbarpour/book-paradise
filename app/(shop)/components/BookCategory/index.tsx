@@ -4,10 +4,10 @@ import { SummarizedBookInfo } from "@/types";
 
 async function getData(categoryId: number) {
   const res = await fetch(
-    process.env.BASE_URL + "User/Books/GetList?categoryId=" + categoryId
+    process.env.BASE_URL + "Books/GetList?categoryId=" + categoryId
   );
 
-  if (!res.ok) {
+  if (res.status !== 200) {
     throw new Error("Failed to fetch data");
   }
 

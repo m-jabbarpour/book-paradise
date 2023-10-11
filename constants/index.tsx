@@ -1,1 +1,1 @@
-export const BASE_URL = "https://book-paradise.ir/api/";
+export const BASE_URL = "https://api.book-paradise.ir/api/";

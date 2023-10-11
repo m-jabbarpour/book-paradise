@@ -17,7 +17,7 @@ const BookDetails: React.FC<Props> = ({ book }) => {
           <div className="flex pb-4">
             <div className="relative w-[120px] h-[177.6px] sm:w-[150px] sm:h-[222px] lg:w-[180px] lg:h-[270px] xl:w-[200px] xl:h-[296px] rounded sm:rounded-lg overflow-hidden shadow-lg">
               <Image
-                src={BASE_URL + "User/Books/GetImage/" + book.id}
+                src={BASE_URL + "Books/GetImage/" + book.id}
                 width={200}
                 height={281}
                 alt={book.title}
