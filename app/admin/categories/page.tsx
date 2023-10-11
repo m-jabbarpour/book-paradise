@@ -59,7 +59,7 @@ const Categories = () => {
         maxWidth: 100,
       },
     ],
-    []
+    [deleteCategory]
   );
 
   return (

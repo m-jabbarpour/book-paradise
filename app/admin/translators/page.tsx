@@ -54,7 +54,7 @@ const Translators = () => {
         maxWidth: 100,
       },
     ],
-    []
+    [deleteTranslator]
   );
 
   return (

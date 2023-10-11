@@ -52,7 +52,7 @@ const Authors = () => {
         maxWidth: 100,
       },
     ],
-    []
+    [deleteAuthor]
   );
 
   return (

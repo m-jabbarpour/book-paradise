@@ -49,7 +49,7 @@ const Publishers = () => {
         maxWidth: 100,
       },
     ],
-    []
+    [deletePublisher]
   );
 
   return (

@@ -67,7 +67,7 @@ const Books = () => {
         maxWidth: 100,
       },
     ],
-    []
+    [deleteBook]
   );
 
   return (
